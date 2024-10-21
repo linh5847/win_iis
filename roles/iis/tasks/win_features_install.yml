@@ -99,9 +99,9 @@
 - name: Add a HTTPS binding with host header and SNI enabled
   win_iis_webbinding:
     name: '{{ item.name }}'
-    protocol: '{{ website_protocol }}'
+    protocol: '{{ item.protocol }}'
     ip: '{{ item.ip }}'
-    port: '{{ website_port }}'
+    port: '{{ item.port }}'
     host_header: '{{ item.host }}'
     ssl_flags: 1
     certificate_hash: '{{ pfx_cert.thumbprints[0] }}'

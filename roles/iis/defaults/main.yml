@@ -16,37 +16,19 @@ uk1_app_website:
     host: devbox.tmkiln.app
     ip: 192.168.56.150
     port: 443
+    protocol: https
   - name: BMWiQcanvases
     host: deviqcanvases.tmkiln.app
     ip: 192.168.56.151
-    port: 80
+    port: 443
+    protocol: https
   - name: BMWiQprocess
     host: deviqprocess.tmkiln.app
     ip: 192.168.56.152
     port: 443
+    protocol: https
   - name: IQroute
     host: deviqroute.tmkiln.app
     ip: 192.168.56.153
-    port: 80
-
-website:
-  - name: site1
-    host: site1.tmklin.app
-    ip: 192.168.56.150
     port: 443
-  - name: site2
-    host: site2.tmkiln.app
-    ip: 192.168.56.151
-    port: 80 
-
-users_with_items:
-  name: alice
-  personal_directories:
-    - bob
-    - carol
-    - dan
-  name: bob
-  personal_directories:
-    - alice
-    - carol
-    - dan
+    protocol: https
