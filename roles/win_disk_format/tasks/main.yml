@@ -1,0 +1,5 @@
+---
+# tasks file for win_disk_format
+- name: Calling win_disk_format.yml file.
+  include_tasks:
+    file: win_disk_format.yml

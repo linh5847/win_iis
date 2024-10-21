@@ -1,0 +1,3 @@
+---
+# defaults file for win_disk_format
+allocation_unit_size: 0

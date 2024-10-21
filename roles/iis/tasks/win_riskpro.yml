@@ -1,0 +1,109 @@
+---
+- name: Check for "{{ riskpro_dir }}" directory exists.
+  win_stat:
+    path: "{{ riskpro_dir }}"
+  register: riskprodir
+
+- name: Create a "{{ riskpro_dir }}" if it's not existed.
+  win_file:
+    path: "{{ riskpro_dir }}"
+    state: directory
+  when: riskprodir.stat.exists == False
+
+- name: Check for "{{ riskpro_dir }}" directory created.
+  win_stat:
+    path: "{{ riskpro_dir }}"
+  register: riskprodir_exist
+
+- name: Grant Everyone Read,Write,ListDirectory and ReadAndExecute to "{{ riskpro_dir }}" directory.
+  win_acl:
+    path: "{{ riskpro_dir }}"
+    user: everyone
+    type: allow
+    rights: Read,Write,ReadAndExecute,ListDirectory
+    state: present
+  when: riskprodir_exist.stat.exists == True
+
+- name: Check for "{{ riskdir }}" directory exists.
+  win_stat:
+    path: "{{ riskdir }}"
+  register: risk_dir
+
+- name: Create a "{{ riskdir }}" if it's not existed.
+  win_file:
+    path: "{{ riskdir }}"
+    state: directory
+  when: risk_dir.stat.exists == False
+
+- name: Check for "{{ riskdir }}\\{{ riskdir_client }}" directory exists.
+  win_stat:
+    path: "{{ riskdir }}\\{{ riskdir_client }}"
+  register: riskdirclient
+
+- name: Create a "{{ riskdir }}\\{{ riskdir_client }}" if it's not existed.
+  win_file:
+    path: "{{ riskdir }}\\{{ riskdir_client }}" 
+    state: directory
+  when: riskdirclient.stat.exists == False
+
+- name: Check for "{{ riskdir }}" directory created.
+  win_stat:
+    path: "{{ riskdir }}"
+  register: riskdir_exist
+
+- name: Grant Everyone Read,Write,ListDirectory and ReadAndExecute to "{{ riskdir }}" directory.
+  win_acl:
+    path: "{{ riskdir }}"
+    user: everyone
+    type: allow
+    rights: Read,Write,ReadAndExecute,ListDirectory
+    state: present
+  when: riskdir_exist.stat.exists == True
+
+- name: Check for "{{ riskpreview }}" directory exists.
+  win_stat:
+    path: "{{ riskpreview }}"
+  register: rp7previewsdir
+
+- name: Create a "{{ riskpreview }}" directory if it's not existed.
+  win_file:
+    path: "{{ riskpreview }}"
+    state: directory
+  when: rp7previewsdir.stat.exists == False
+
+- name: Check for "{{ riskpreview }}" directory created.
+  win_stat:
+    path: "{{ riskpreview }}"
+  register: rp7previewsdir_exist
+
+- name: Grant Everyone Read,Write,ListDirectory and ReadAndExecute to "{{ riskpreview }}" directory.
+  win_acl:
+    path: "{{ riskpreview }}"
+    user: everyone
+    type: allow
+    rights: Read,Write,ReadAndExecute,ListDirectory
+    state: present
+  when: rp7previewsdir_exist.stat.exists == True
+
+- name: Check for a "{{ riskpreview }}\\{{ riskdir_client }}" directory exists.
+  win_stat:
+    path: "{{ riskpreview }}\\{{ riskdir_client }}"
+  register: rp7preview_clidir
+
+- name: Create a "{{ riskpreview }}\\{{ riskdir_client }}" if it's not existed.
+  win_file:
+    path: "{{ riskpreview }}\\{{ riskdir_client }}"
+    state: directory
+  when: rp7preview_clidir.stat.exists == False
+
+- name: Check for "{{ riskpreview }}\\{{ riskdir_client }}" directory created.
+  win_stat:
+    path: "{{ riskpreview }}\\{{ riskdir_client }}"
+  register: rp7previews_client
+
+- name: Create sub-directories if not existed.
+  win_file:
+    path:  "{{ riskpreview }}\\{{ riskdir_client }}\\{{ item }}"
+    state: directory
+  with_items: ["{{ rp7previews_client_folders }}"]
+  when: rp7previews_client.stat.exists == False

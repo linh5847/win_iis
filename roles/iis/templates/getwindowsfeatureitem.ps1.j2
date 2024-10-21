@@ -1,0 +1,32 @@
+# Collect all items from Web Server Application Deployment
+Write-Host "Collects all items in Web Server Application Development."
+$features = Get-WindowsFeature Web-App-Dev
+$subFeatures = $features.subFeatures -split " "
+foreach($item in $subFearures) { 
+    Get-WindowsFeature $item 
+}
+
+Write-Host " "
+# Collect all items from Web Server Management Tools
+Write-Host "Collects all items in Web Server FTP Server."
+$Features = Get-WindowsFeature Web-Ftp-Server
+$subfeatures = $Features.SubFeatures -split " "
+foreach($value in $subfeatures) {
+    Get-WindowsFeature $value
+}
+
+Get-WindowsFeature BitLocker
+#Install-WindowsFeature BitLocker
+Get-WindowsFeature BitLocker-NetworkUnlock
+# Group-Policy-Management
+Get-WindowsFeature GPMC
+
+Write-Host " "
+Write-Host "Collects all items from Remote Server Administration Tools"
+# Remote Server Administration Tools AD DS and LDS Tools
+Get-WindowsFeature RSAT-AD-Tools
+Get-WindowsFeature RSAT*
+# Windows Process Activation Services (Process Model and Configuration APIs)
+Get-WindowsFeature WAS*
+# Windows Search Service
+Get-WindowsFeature Search-Service

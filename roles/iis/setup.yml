@@ -1,0 +1,8 @@
+---
+- name: Setup Windows Website.
+  hosts: all
+  gather_facts: false
+
+  roles:
+  - win_disk_format
+  - iis

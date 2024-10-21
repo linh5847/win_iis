@@ -1,0 +1,5 @@
+---
+# vars file for riskpro
+cert_file: files/cert.pfx
+cert_password: root
+nexus_url: xxxxx
