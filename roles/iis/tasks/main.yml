@@ -1,9 +1,5 @@
 ---
-# tasks file for riskpro
+# tasks file for Windows IIS
 - name: Calling win_features_install.yml file.
   include_tasks:
     file: win_features_install.yml
-
-# - name: Calling win_riskpro.yml file.
-#   include_tasks:
-#     file: win_riskpro.yml

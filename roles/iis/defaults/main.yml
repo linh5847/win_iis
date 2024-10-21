@@ -1,5 +1,5 @@
 ---
-# defaults file for riskpro
+# defaults file for Windows IIS
 win_role_features:
   - Web-Server
   - Web-Http-Redirect
