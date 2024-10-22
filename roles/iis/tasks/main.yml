@@ -3,3 +3,7 @@
 - name: Calling win_features_install.yml file.
   include_tasks:
     file: win_features_install.yml
+
+- name: Calling win_iis_webbinding.yml file.
+  include_tasks:
+    file: win_iis_webbinding.yml

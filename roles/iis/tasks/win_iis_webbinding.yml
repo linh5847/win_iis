@@ -1,0 +1,52 @@
+---
+- name: Check C:\temp directory exists.
+  win_stat:
+    path: C:\temp
+  register: tempdir
+
+- name: Create C:\temp if it's not existed.
+  win_file:
+    path: C:\temp
+    state: directory
+  when: tempdir.stat.exists == False
+
+# - name: Fetch PFX from Nexus.
+#   win_get_url:
+#     url:  '{{ nexus_url }}'
+#     dest: C:\temp\cert.pfx
+    
+- name: Copy file.
+  win_copy:
+    src: '{{ cert_file }}'
+    dest: C:\temp\cert.pfx
+
+- name: Import certificate be used by IIS
+  win_certificate_store:
+    path: C:\temp\cert.pfx
+    file_type: pkcs12
+    password: '{{ cert_password }}'
+    store_location: LocalMachine
+    key_storage: machine
+    state: present
+  become: true
+  become_method: runas
+  become_user: SYSTEM
+  register: pfx_cert
+  when: not ansible_check_mode
+
+- name: Check the PFX certificate thumbprint.
+  debug:
+    msg: '{{ pfx_cert.thumbprints[0] }}'
+
+# - name: Add a HTTPS binding with host header and SNI enabled
+#   win_iis_webbinding:
+#     name: '{{ item.name }}'
+#     protocol: '{{ item.protocol }}'
+#     ip: '{{ item.ip }}'
+#     port: '{{ item.port }}'
+#     host_header: '{{ item.host }}'
+#     ssl_flags: 1
+#     certificate_hash: '{{ pfx_cert.thumbprints[0] }}'
+#     state: present
+#   loop: '{{ uk1_app_website }}'
+#   when: not ansible_check_mode
