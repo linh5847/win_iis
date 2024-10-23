@@ -1,8 +1,8 @@
 Ansible automation for Windows IIS to create a website and binding that specific website with SSL Certificate to port 443.
 
-We can have one ansible block of code to create many webistes with the default port 80 and suggestion to keep this route. The best option to leave out the port out for always default to port 80 only every website we intend to create.
+We can have one ansible block of code to create many webistes with the default port 80 and suggest to keep this route. The best option to leave out the port in the code for always default to port 80 for every website we intend to create, using ansible automation.
 
-Ansible automation for Windows IIS website binding to SSL Certificate to port 433 can accepted one site only. This means that if we have two sites in need of HTTPS. Ansible will run with error and/or IIS website will turn to stop due to conflict. 
+Ansible automation for Windows IIS website binding to SSL Certificate port 433 can accepted one site only. This means that if we have two sites in need of HTTPS. Ansible will run with error and/or IIS website will turn to stop due to conflict. 
 
 The below one block of code has been commented out and it's working fine. As soon as we uncomment out another web binding. Error will pop up and website inside IIS will stop.
 

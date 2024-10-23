@@ -17,7 +17,7 @@
     include_management_tools: true
 
 # With WINRM. This module is not working with error "msg": "specified folder must already exist: path"
-# Also applied to win_iis_virtualdirectory
+# https://docs.ansible.com/ansible/2.9/modules/win_iis_webapplication_module.html
 # - name: Add ACME webapplication on IIS.
 #   win_iis_webapplication:
 #     name: api
@@ -26,6 +26,10 @@
 #     physical_path: C:\inetpub\wwwroot\api
 #   #with_items: "{{ users_with_items }}"
 #   when: not ansible_check_mode
+
+# With WINRM. This module is not working with error "msg": "specified folder must already exist: path"
+# Ansible official website https://docs.ansible.com/ansible/latest/collections/community/windows/win_iis_virtualdirectory_module.html
+# Not tested with SSH key, as most Windows are intending to use WinRM instead.
 
 - name: Create website physical path.
   win_file:

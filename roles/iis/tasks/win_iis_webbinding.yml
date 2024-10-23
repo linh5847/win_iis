@@ -14,7 +14,8 @@
 #   win_get_url:
 #     url:  '{{ nexus_url }}'
 #     dest: C:\temp\cert.pfx
-    
+
+# comment the win_copy out if nexus or artifactory repo is available to fetch with above module.    
 - name: Transfer SSL certificate in PFX format to the target Windows IIS web machine.
   win_copy:
     src: '{{ cert_file }}'
