@@ -12,23 +12,23 @@ win_role_features:
 unc_host: C:\inetpub\wwwroot
 
 uk1_app_website:
-  - name: BOX
-    host: devbox.tmkiln.app
+  - name: dev
+    host: dev.vntechsol.com
     ip: 192.168.56.150
     port: 443
     protocol: https
-  - name: BMWiQcanvases
-    host: deviqcanvases.tmkiln.app
+  - name: sys
+    host: sys.vntechsol.com
     ip: 192.168.56.151
-    port: 443
+    port: 543
     protocol: https
-  - name: BMWiQprocess
-    host: deviqprocess.tmkiln.app
+  - name: qa
+    host: qa.vntechsol.com
     ip: 192.168.56.152
-    port: 443
+    port: 643
     protocol: https
-  - name: IQroute
-    host: deviqroute.tmkiln.app
+  - name: prod
+    host: prod.vntechsol.com
     ip: 192.168.56.153
-    port: 443
+    port: 743
     protocol: https

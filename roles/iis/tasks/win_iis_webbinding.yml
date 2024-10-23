@@ -15,7 +15,7 @@
 #     url:  '{{ nexus_url }}'
 #     dest: C:\temp\cert.pfx
     
-- name: Copy file.
+- name: Transfer SSL certificate in PFX format to the target Windows IIS web machine.
   win_copy:
     src: '{{ cert_file }}'
     dest: C:\temp\cert.pfx
@@ -27,16 +27,52 @@
     password: '{{ cert_password }}'
     store_location: LocalMachine
     key_storage: machine
+    key_exportable: yes
     state: present
-  become: true
+  become: True
   become_method: runas
   become_user: SYSTEM
-  register: pfx_cert
+  register: cert_import
   when: not ansible_check_mode
 
-- name: Check the PFX certificate thumbprint.
-  debug:
-    msg: '{{ pfx_cert.thumbprints[0] }}'
+# - name: Repair import cert in case private key is missing.
+#   win_command: 'certutil -repairstore my "{{cert_import.thumbprints[0]}}"'
+#   become: True
+#   become_method: runas
+#   become_user: SYSTEM
+
+# - name: Add a HTTPS binding with host header and SNI enabled
+#   win_iis_webbinding:
+#     name: dev
+#     protocol: https
+#     ip: 192.168.56.150
+#     port: 443
+#     host_header: dev.vntechsol.com
+#     ssl_flags: 1
+#     certificate_hash: '{{ cert_import.thumbprints[0] }}'
+#     certificate_store_name: my
+#     state: absent
+#   when: not ansible_check_mode
+
+- name: set https binding for dev site
+  win_iis_webbinding:
+    name: dev
+    protocol: https
+    certificate_hash: "{{ cert_import.thumbprints[0] }}"
+    port: 443
+    ip: 192.168.56.150
+    host_header: dev.vntechsol.com
+    state: present
+
+- name: set https binding for MySite site
+  win_iis_webbinding:
+    name: sys
+    protocol: https
+    certificate_hash: "{{ cert_import.thumbprints[0] }}"
+    port: 543
+    ip: 192.168.56.151
+    host_header: sys.vntechsol.com
+    state: present
 
 # - name: Add a HTTPS binding with host header and SNI enabled
 #   win_iis_webbinding:

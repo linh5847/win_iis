@@ -36,3 +36,5 @@ Author Information
 ------------------
 
 An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+
+create windows ssl cert = https://medium.com/@phylypo/devops-automate-certificate-process-for-iis-5ae3b6788182

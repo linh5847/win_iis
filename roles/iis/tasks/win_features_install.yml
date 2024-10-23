@@ -37,22 +37,11 @@
   win_iis_website:
     name: "{{ item.name }}"
     state: started
-    port: "{{ item.port }}"
     ip: "{{ item.ip }}"
+    #port: "{{ item.port }}"
     hostname: "{{ item.host }}"
     application_pool: DefaultAppPool # Ansible can accept DefaultAppPool only.
     physical_path: "C:\\inetpub\\wwwroot\\{{ item.name }}"
     parameters: logfile.directory:C:\inetpub\logs
   with_items: "{{ uk1_app_website }}"
   when: not ansible_check_mode
-
-# - name: newWebsite
-#   win_iis_website:
-#     name: site1
-#     state: started
-#     port: 80
-#     ip: 127.0.0.1
-#     hostname: site1.tmkiln.app
-#     application_pool: DefaultAppPool # Ansible accept DefaultAppPool only.
-#     physical_path: C:\inetpub\wwwroot\site1
-#     parameters: logfile.directory:C:\inetpub\logs

@@ -2,4 +2,6 @@
 # vars file for Windows IIS
 cert_file: files/cert.pfx
 cert_password: root
+store_name: "Personal"
+certificate_name: cert
 nexus_url: xxxxx
