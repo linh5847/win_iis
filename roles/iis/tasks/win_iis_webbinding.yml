@@ -41,48 +41,14 @@
 #   become_method: runas
 #   become_user: SYSTEM
 
-# - name: Add a HTTPS binding with host header and SNI enabled
-#   win_iis_webbinding:
-#     name: dev
-#     protocol: https
-#     ip: 192.168.56.150
-#     port: 443
-#     host_header: dev.vntechsol.com
-#     ssl_flags: 1
-#     certificate_hash: '{{ cert_import.thumbprints[0] }}'
-#     certificate_store_name: my
-#     state: absent
-#   when: not ansible_check_mode
-
-- name: set https binding for dev site
+- name: Add a HTTPS binding with host header and SNI enabled
   win_iis_webbinding:
-    name: dev
-    protocol: https
-    certificate_hash: "{{ cert_import.thumbprints[0] }}"
-    port: 443
-    ip: 192.168.56.150
-    host_header: dev.vntechsol.com
+    name: '{{ item.name }}'
+    protocol: '{{ item.protocol }}'
+    certificate_hash: '{{ cert_import.thumbprints[0] }}'
+    port: '{{ item.port }}'
+    ip: '{{ item.ip }}'    
+    host_header: '{{ item.host }}'    
     state: present
-
-- name: set https binding for MySite site
-  win_iis_webbinding:
-    name: sys
-    protocol: https
-    certificate_hash: "{{ cert_import.thumbprints[0] }}"
-    port: 543
-    ip: 192.168.56.151
-    host_header: sys.vntechsol.com
-    state: present
-
-# - name: Add a HTTPS binding with host header and SNI enabled
-#   win_iis_webbinding:
-#     name: '{{ item.name }}'
-#     protocol: '{{ item.protocol }}'
-#     ip: '{{ item.ip }}'
-#     port: '{{ item.port }}'
-#     host_header: '{{ item.host }}'
-#     ssl_flags: 1
-#     certificate_hash: '{{ pfx_cert.thumbprints[0] }}'
-#     state: present
-#   loop: '{{ uk1_app_website }}'
-#   when: not ansible_check_mode
+  loop: '{{ uk1_app_website }}'
+  when: not ansible_check_mode
