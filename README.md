@@ -6,6 +6,9 @@ Ansible automation for Windows IIS website binding to SSL Certificate port 433 c
 
 The below one block of code has been commented out and it's working fine. As soon as we uncomment out another web binding. Error will pop up and website inside IIS will stop.
 
+<table>
+<td>
+```
 - name: create IISSite site
   win_iis_website:
     name: IISSite
@@ -47,7 +50,9 @@ The below one block of code has been commented out and it's working fine. As soo
     ip: 192.168.56.151
     host_header: MySite.vntechsol.com
     state: present
-
+```
+</td>
+</table>
 With the win_iis_webbinding module. Assume that we have not using win_iis_website to create a website. This win_iis_webbinding will get error during the execution due to no valid or website existed.
 
 win_iis_webbinding module
