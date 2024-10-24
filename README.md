@@ -9,47 +9,47 @@ The below one block of code has been commented out and it's working fine. As soo
 <table>
 <td>
 ```
-- name: create IISSite site
-  win_iis_website:
-    name: IISSite
-    state: started
-    ip: 127.0.0.1
-    port: 80    # Suggest to remove and allows ansible to treat a default port80.
-    hostname: IISSite.vntechsol.com
-    application_pool: DefaultAppPool
-    physical_path: C:\inetpub\wwwroot\IIS_Site
-    parameters: logfile.directory:C:\inetpub\logs
+  - name: create IISSite site
+    win_iis_website:
+      name: IISSite
+      state: started
+      ip: 127.0.0.1
+      port: 80    # Suggest to remove and allows ansible to treat a default port80.
+      hostname: IISSite.vntechsol.com
+      application_pool: DefaultAppPool
+      physical_path: C:\inetpub\wwwroot\IIS_Site
+      parameters: logfile.directory:C:\inetpub\logs
 
-- name: create MySite site
-  win_iis_website:
-    name: MySite
-    state: started
-    ip: 192.168.56.151
-    port: 80
-    hostname: MySite.vntechsol.com
-    application_pool: DefaultAppPool
-    physical_path: C:\inetpub\wwwroot\MySite
-    parameters: logfile.directory:C:\inetpub\logs
+  - name: create MySite site
+    win_iis_website:
+      name: MySite
+      state: started
+      ip: 192.168.56.151
+      port: 80
+      hostname: MySite.vntechsol.com
+      application_pool: DefaultAppPool
+      physical_path: C:\inetpub\wwwroot\MySite
+      parameters: logfile.directory:C:\inetpub\logs
 
-# - name: set https binding for IISSite site
-#   win_iis_webbinding:
-#     name: IISSite
-#     protocol: https
-#     certificate_hash: "{{ cert_import.thumbprints[0] }}"
-#     port: 443
-#     ip: 127.0.0.1
-#     host_header: IISSite.vntechsol.com
-#     state: present
+  # - name: set https binding for IISSite site
+  #   win_iis_webbinding:
+  #     name: IISSite
+  #     protocol: https
+  #     certificate_hash: "{{ cert_import.thumbprints[0] }}"
+  #     port: 443
+  #     ip: 127.0.0.1
+  #     host_header: IISSite.vntechsol.com
+  #     state: present
 
-- name: set https binding for MySite site
-  win_iis_webbinding:
-    name: MySite
-    protocol: https
-    certificate_hash: "{{ cert_import.thumbprints[0] }}"
-    port: 443
-    ip: 192.168.56.151
-    host_header: MySite.vntechsol.com
-    state: present
+  - name: set https binding for MySite site
+    win_iis_webbinding:
+      name: MySite
+      protocol: https
+      certificate_hash: "{{ cert_import.thumbprints[0] }}"
+      port: 443
+      ip: 192.168.56.151
+      host_header: MySite.vntechsol.com
+      state: present
 ```
 </td>
 </table>
