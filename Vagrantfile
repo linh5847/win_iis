@@ -26,6 +26,9 @@ Vagrant.configure("2") do |config|
   config.vm.define "windows2019"
   config.vm.box = "jborean93/WindowsServer2019"
   config.vm.communicator = "winrm"
+  #config.winrm.host = "192.168.56.180"
+  config.winrm.ssl_peer_verification = false
+  #config.vm.boot_timeout = 900
 
   # Admin user name and password
   config.winrm.username = "vagrant"

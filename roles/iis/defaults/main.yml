@@ -20,15 +20,15 @@ uk1_app_website:
   - name: sys
     host: sys.vntechsol.com
     ip: 192.168.56.151
-    port: 543
+    port: 443
     protocol: https
   - name: qa
     host: qa.vntechsol.com
     ip: 192.168.56.152
-    port: 643
+    port: 443
     protocol: https
   - name: prod
     host: prod.vntechsol.com
     ip: 192.168.56.153
-    port: 743
+    port: 443
     protocol: https

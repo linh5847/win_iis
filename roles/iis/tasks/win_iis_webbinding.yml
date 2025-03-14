@@ -51,5 +51,16 @@
     ip: '{{ item.ip }}'    
     host_header: '{{ item.host }}'    
     state: present
+    ssl_flags: 0
+    #require_sni: true           # Enables for multiple websites with port 443 on different DNS names and IPs. Tries ssl_flags: true
   loop: '{{ uk1_app_website }}'
   when: not ansible_check_mode
+
+# The ssl_flags: 1 will check/tick the Require Server Name Indication, but has a warning message as follows
+# No default SSL site has been created. To support browsers without any SNI capabilities, it is recommended to create default SSL site
+#
+# The C:\Windows\System32\inetsrv\Config\applicationHost.config should holds all the websites with ssFlags="0"
+#
+# ssl_flags: 0  = to disable SNI and 1 = to enabled SNI
+#
+# Require Server Name Binding is require when you have SSL sharing the same DNS, IP and port on multiple websites in which you shouldn't consider.
